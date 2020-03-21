@@ -612,6 +612,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FC94C2831D61714F5959A3DB /* Pods-Homework.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5TGNZ3S2RV;
@@ -632,6 +633,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F5FE81AF712E02DC3AB5EAF /* Pods-Homework.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5TGNZ3S2RV;
@@ -652,7 +654,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ADAFFCCCC3B80AEEC32CD9F9 /* Pods-HomeworkTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5TGNZ3S2RV;
@@ -675,7 +677,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FDA6AD7633FD921A3298A1DE /* Pods-HomeworkTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5TGNZ3S2RV;
@@ -698,7 +700,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AA81D48B7B09B3F00505904C /* Pods-Homework-HomeworkUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5TGNZ3S2RV;
 				INFOPLIST_FILE = HomeworkUITests/Info.plist;
@@ -719,7 +721,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3D788D7D9912C5A3B8C395D7 /* Pods-Homework-HomeworkUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5TGNZ3S2RV;
 				INFOPLIST_FILE = HomeworkUITests/Info.plist;
