@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
-final class MainViewController: UIViewController {
-    init() {
-        super.init(nibName: nil, bundle: nil)
-    }
+final class MainViewController: ViewController {
+    let viewModel: MainViewModel = MainViewModel()
     
+    override init(navigationBarConfig: TBNavigationBar.Config) {
+        super.init(navigationBarConfig: navigationBarConfig)
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

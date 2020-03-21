@@ -16,7 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let vc: MainViewController = MainViewController()
+        let config: TBNavigationBar.Config = .view(SearchBarView(), false)
+        let vc: MainViewController = MainViewController(navigationBarConfig: config)
         let nc: NavigationController = NavigationController(rootViewController: vc)
         
         window = UIWindow(frame: UIScreen.main.bounds)
