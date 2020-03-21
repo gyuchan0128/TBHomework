@@ -1,0 +1,39 @@
+# included:
+#     - LezhinComics/Sources/Swift
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+    - Pods
+
+disabled_rules:
+  - file_length
+  - line_length
+  - nesting
+  - todo
+  - trailing_whitespace
+  - type_body_length
+  - cyclomatic_complexity
+  - identifier_name
+  - empty_enum_arguments
+  - unused_closure_parameter
+
+type_name:
+  min_length: 4 # only warning
+  max_length: # warning and error
+    warning: 40
+    error: 80
+  excluded: # excluded via string
+    - T
+
+vertical_whitespace:
+  max_empty_lines: 2
+
+function_parameter_count:
+  warning: 8
+  error: 10
+
+identifier_name:
+  min_length: 2
+
+custom_rules:
+  closure_params_parantheses:
+    regex: '(?:\{\s*(?:\[[^\]]+\])?\s*(\([^:},]+\))\s*(in|->))|(?:\{\s*(?:\[[^\]]+\])?\s*([^(\/\/):}(\[]+,+[^:})\]]+)\s*([^\w]in\s|->))'
+    message: "Don't use parantheses around non-typed single parameter in a closure, otherwise should use parantheses."
