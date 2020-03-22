@@ -22,11 +22,12 @@ struct SearchBlogResponseModel: Mappable {
 }
 
 struct SearchBlogDocumentsResponseModel: SearchDocumentResponse, Mappable {
+    var type: ListRequestType = .blog
     var name: String?
     var contents: String?
-    var datetime: Date?
+    var datetime: Date = Date(timeIntervalSince1970: .zero)
     var thumbnail: URL?
-    var title: String?
+    var title: String = ""
     var url: URL?
     
     init?(map: Map) {

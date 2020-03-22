@@ -39,6 +39,15 @@ final class TBNavigationBar: UIView {
         return button
     }()
     
+    lazy var customView: UIView? = {
+        switch config {
+        case .view(let searchBar, _):
+            return searchBar
+        default:
+            return nil
+        }
+    }()
+    
     let titleLabel: UILabel = UILabel().then {
         $0.textAlignment = .center
     }
@@ -131,7 +140,10 @@ class ViewController: UIViewController {
     init(navigationBarConfig: TBNavigationBar.Config) {
         customNavigationBar = TBNavigationBar(config: navigationBarConfig)
         super.init(nibName: nil, bundle: nil)
-        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         view.addSubview(customNavigationBar)
         customNavigationBar.snp.makeConstraints { make in
             make.left.right.equalToSuperview()

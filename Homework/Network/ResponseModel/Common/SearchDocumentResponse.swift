@@ -9,10 +9,11 @@
 import Foundation
 
 protocol SearchDocumentResponse {
+    var type: ListRequestType { get }
     var name: String? { get }
     var contents: String? { get }
-    var datetime: Date? { get }
+    var datetime: Date { get }
     var thumbnail: URL? { get }
-    var title: String? { get }
+    var title: String { get }
     var url: URL? { get }
 }

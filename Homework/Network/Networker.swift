@@ -12,6 +12,11 @@ import RxSwift
 import RxCocoa
 import ObjectMapper
 
+enum ListRequestType: Hashable {
+    case blog
+    case cafe
+}
+
 struct Networker {
     private let manager = SessionManager.default
     
@@ -22,7 +27,7 @@ struct Networker {
         return ["Authorization": "KakaoAK eb4859c8095d99411e0c184b3bb36bb0"]
     }
     
-    func request<T: Mappable>(api: TBAPI) -> Single<T> {
+    func request<T: Mappable>(api: TBAPI) -> Single<T?> {
         let request = manager.rx.json(api.method(),
                                   api.url(),
                                   parameters: api.params(),
@@ -35,29 +40,21 @@ struct Networker {
 
 
 extension ObservableType {
-    public func mapObject<T: Mappable>(type: T.Type) -> Observable<T> {
-        return flatMap { data -> Observable<T> in
+    public func mapObject<T: Mappable>(type: T.Type) -> Observable<T?> {
+        return flatMap { data -> Observable<T?> in
             let json = data as AnyObject
             guard let object = Mapper<T>().map(JSONObject: json) else {
-                throw NSError(
-                    domain: "",
-                    code: -1,
-                    userInfo: [NSLocalizedDescriptionKey: "can't responseModel mapping"]
-                )
+                return .just(nil)
             }
             return Observable.just(object)
         }
     }
 
-    public func mapArray<T: Mappable>(type: T.Type) -> Observable<[T]> {
-        return flatMap { data -> Observable<[T]> in
+    public func mapArray<T: Mappable>(type: T.Type) -> Observable<[T]?> {
+        return flatMap { data -> Observable<[T]?> in
             let json = data as AnyObject
             guard let object = Mapper<T>().mapArray(JSONObject: json) else {
-                throw NSError(
-                    domain: "kakao api",
-                    code: -1,
-                    userInfo: [NSLocalizedDescriptionKey: "can't responseModel mapping"]
-                )
+                return .just(nil)
             }
             return Observable.just(object)
         }
