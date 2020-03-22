@@ -15,6 +15,15 @@ import ObjectMapper
 enum ListRequestType: Hashable {
     case blog
     case cafe
+    
+    func toPresentableFilterType() -> CellPresentableModel.FilterType {
+        switch self {
+        case .blog:
+            return .blog
+        case .cafe:
+            return .cafe
+        }
+    }
 }
 
 struct Networker {

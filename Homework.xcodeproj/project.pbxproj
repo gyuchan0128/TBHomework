@@ -31,6 +31,8 @@
 		412E29012426F14200B7DFB7 /* BlogRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E29002426F14200B7DFB7 /* BlogRequester.swift */; };
 		412E29032426F14D00B7DFB7 /* CafeRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E29022426F14D00B7DFB7 /* CafeRequester.swift */; };
 		412E29052427054C00B7DFB7 /* RequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E29042427054C00B7DFB7 /* RequestViewModel.swift */; };
+		412E290E24275FA800B7DFB7 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E290C24275FA800B7DFB7 /* TableViewCell.swift */; };
+		412E290F24275FA800B7DFB7 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 412E290D24275FA800B7DFB7 /* TableViewCell.xib */; };
 		A2A5F162EF519741DC878416 /* Pods_Homework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D2E5BDBA68224E82636780 /* Pods_Homework.framework */; };
 		E9C1CCCAC56A5C843DBD4B39 /* Pods_Homework_HomeworkUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C82921228018898657AF6DE5 /* Pods_Homework_HomeworkUITests.framework */; };
 		FDF7E3A38F7A376EF710B5A8 /* Pods_HomeworkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0953D4766A6AFD3CAF497D /* Pods_HomeworkTests.framework */; };
@@ -85,6 +87,8 @@
 		412E29002426F14200B7DFB7 /* BlogRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogRequester.swift; sourceTree = "<group>"; };
 		412E29022426F14D00B7DFB7 /* CafeRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeRequester.swift; sourceTree = "<group>"; };
 		412E29042427054C00B7DFB7 /* RequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewModel.swift; sourceTree = "<group>"; };
+		412E290C24275FA800B7DFB7 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		412E290D24275FA800B7DFB7 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		5A0953D4766A6AFD3CAF497D /* Pods_HomeworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F5FE81AF712E02DC3AB5EAF /* Pods-Homework.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homework.release.xcconfig"; path = "Target Support Files/Pods-Homework/Pods-Homework.release.xcconfig"; sourceTree = "<group>"; };
 		AA81D48B7B09B3F00505904C /* Pods-Homework-HomeworkUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homework-HomeworkUITests.debug.xcconfig"; path = "Target Support Files/Pods-Homework-HomeworkUITests/Pods-Homework-HomeworkUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -180,6 +184,7 @@
 		412E27AF2425B9B300B7DFB7 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				412E29072427554400B7DFB7 /* Cell */,
 				412E28E12425F3EA00B7DFB7 /* ViewModel */,
 				412E28DE2425F39E00B7DFB7 /* View */,
 				412E27B02425B9C600B7DFB7 /* MainViewController.swift */,
@@ -303,6 +308,15 @@
 				412E29022426F14D00B7DFB7 /* CafeRequester.swift */,
 			);
 			path = Requester;
+			sourceTree = "<group>";
+		};
+		412E29072427554400B7DFB7 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				412E290C24275FA800B7DFB7 /* TableViewCell.swift */,
+				412E290D24275FA800B7DFB7 /* TableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		5B3B3C0C39EE9576273F85E5 /* Pods */ = {
@@ -439,6 +453,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				412E278C2425B97A00B7DFB7 /* LaunchScreen.storyboard in Resources */,
+				412E290F24275FA800B7DFB7 /* TableViewCell.xib in Resources */,
 				412E27892425B97A00B7DFB7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -600,6 +615,7 @@
 				412E29032426F14D00B7DFB7 /* CafeRequester.swift in Sources */,
 				412E28F5242604DE00B7DFB7 /* SearchCafeAPI.swift in Sources */,
 				412E29052427054C00B7DFB7 /* RequestViewModel.swift in Sources */,
+				412E290E24275FA800B7DFB7 /* TableViewCell.swift in Sources */,
 				412E28E02425F3B100B7DFB7 /* SearchBarView.swift in Sources */,
 				412E28E92425FE8C00B7DFB7 /* SearchBlogResponseModel.swift in Sources */,
 				412E284C2425C96200B7DFB7 /* SupportSnapkit.swift in Sources */,

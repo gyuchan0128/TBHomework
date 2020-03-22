@@ -63,7 +63,7 @@ final class CafeRequester: RequestViewModel, PageableRequest {
                 guard let self = self else { return .just(nil) }
                 self.state = .requesting
                 let request: Single<SearchCafeResponseModel?> = Networker()
-                    .request(api: SearchBlogAPI.search(query: info.query,
+                    .request(api: SearchCafeAPI.search(query: info.query,
                                                        page: self.currentPage+1,
                                                        size: self.sizeOfPage))
                 return request

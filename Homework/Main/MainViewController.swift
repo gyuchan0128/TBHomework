@@ -11,14 +11,15 @@ import SnapKit
 import Then
 
 final class MainViewController: ViewController {
-    struct Const {
-        static let cellIdentifier: String = "cell"
-    }
+    
     let viewModel: MainViewModel = MainViewModel()
     
     let tableView: UITableView = UITableView().then {
         $0.backgroundColor = .white
-        $0.register(UITableViewCell.self, forCellReuseIdentifier: Const.cellIdentifier)
+        $0.register(UINib(nibName: TableViewCell.Const.cellIdentifier,
+                          bundle: nil),
+                    forCellReuseIdentifier: TableViewCell.Const.cellIdentifier)
+        $0.tableFooterView = UIView()
     }
     
     override init(navigationBarConfig: TBNavigationBar.Config) {
@@ -80,19 +81,22 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Const.cellIdentifier) else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.Const.cellIdentifier) as? TableViewCell else {
             return UITableViewCell()
         }
         guard let item = viewModel.items[safe: indexPath.row] else {
             return cell
         }
         
-        cell.textLabel?.text = item.title
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        cell.detailTextLabel?.text = dateFormatter.string(from: item.datetime)
+        cell.bind(pModel: CellPresentableModel(title: item.title,
+                                               imageURL: item.thumbnail,
+                                               type: item.type,
+                                               name: item.name ?? "",
+                                               date: item.datetime))
         return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 112
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
