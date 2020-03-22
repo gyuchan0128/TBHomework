@@ -17,7 +17,7 @@ PODS:
   - RxRelay (5.1.0):
     - RxSwift (~> 5)
   - RxSwift (5.1.0)
-  - SnapKit (4.2.0)
+  - SnapKit (5.0.1)
   - SwiftLint (0.39.1)
   - Then (2.6.0)
 
@@ -54,10 +54,10 @@ SPEC CHECKSUMS:
   RxOptional: b1fcd60856807a564c0215c2184b8d33e7826dc2
   RxRelay: a168bd6caf712d00c676ac344e9295afc93b418e
   RxSwift: ad5874f24bb0dbffd1e9bb8443604e3578796c7a
-  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: 55e96a4a4d537d4a3156859fc1c54bd24851a046
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
 
-PODFILE CHECKSUM: 0de8e2d0ba91a4d28bdae454e24dd787f9d89d6c
+PODFILE CHECKSUM: c2503134db314ae9410ac1a9c340419ef4c8f3fa
 
 COCOAPODS: 1.9.1

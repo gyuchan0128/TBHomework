@@ -57,11 +57,13 @@ final class MainViewController: ViewController {
             view.button.rx.tap
                 .map { view.searchBar.text }
                 .filterNil()
-                .map({ query -> MainViewModel.Input.RequestInfo in
-                    MainViewModel.Input.RequestInfo(isRefresh: true,
-                                                    filterType: .all,
-                                                    query: query)
+                .map({ [weak self] query -> MainViewModel.Input.RequestInfo? in
+                    guard let self = self else { return nil }
+                    return MainViewModel.Input.RequestInfo(isRefresh: true,
+                                                           filterType: self.viewModel.currentFilterType,
+                                                           query: query)
                 })
+                .filterNil()
                 .do(onNext: { [weak self] _ in
                     guard let self = self else { return }
                     self.view.endEditing(true)
@@ -93,5 +95,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row > viewModel.items.count-5 {
+            viewModel.input.request.accept(MainViewModel.Input.RequestInfo(isRefresh: false,
+                                                                           filterType: viewModel.currentFilterType,
+                                                                           query: viewModel.beforeQuery))
+        }
+    }
 
 }
