@@ -33,6 +33,9 @@
 		412E29052427054C00B7DFB7 /* RequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E29042427054C00B7DFB7 /* RequestViewModel.swift */; };
 		412E290E24275FA800B7DFB7 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E290C24275FA800B7DFB7 /* TableViewCell.swift */; };
 		412E290F24275FA800B7DFB7 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 412E290D24275FA800B7DFB7 /* TableViewCell.xib */; };
+		412E29112428333800B7DFB7 /* TableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E29102428333800B7DFB7 /* TableViewHeader.swift */; };
+		412E2913242842E200B7DFB7 /* Formatter+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E2912242842E200B7DFB7 /* Formatter+Util.swift */; };
+		412E29152428477100B7DFB7 /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E29142428477100B7DFB7 /* String+Util.swift */; };
 		A2A5F162EF519741DC878416 /* Pods_Homework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D2E5BDBA68224E82636780 /* Pods_Homework.framework */; };
 		E9C1CCCAC56A5C843DBD4B39 /* Pods_Homework_HomeworkUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C82921228018898657AF6DE5 /* Pods_Homework_HomeworkUITests.framework */; };
 		FDF7E3A38F7A376EF710B5A8 /* Pods_HomeworkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0953D4766A6AFD3CAF497D /* Pods_HomeworkTests.framework */; };
@@ -89,6 +92,9 @@
 		412E29042427054C00B7DFB7 /* RequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewModel.swift; sourceTree = "<group>"; };
 		412E290C24275FA800B7DFB7 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		412E290D24275FA800B7DFB7 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		412E29102428333800B7DFB7 /* TableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHeader.swift; sourceTree = "<group>"; };
+		412E2912242842E200B7DFB7 /* Formatter+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Util.swift"; sourceTree = "<group>"; };
+		412E29142428477100B7DFB7 /* String+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Util.swift"; sourceTree = "<group>"; };
 		5A0953D4766A6AFD3CAF497D /* Pods_HomeworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F5FE81AF712E02DC3AB5EAF /* Pods-Homework.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homework.release.xcconfig"; path = "Target Support Files/Pods-Homework/Pods-Homework.release.xcconfig"; sourceTree = "<group>"; };
 		AA81D48B7B09B3F00505904C /* Pods-Homework-HomeworkUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homework-HomeworkUITests.debug.xcconfig"; path = "Target Support Files/Pods-Homework-HomeworkUITests/Pods-Homework-HomeworkUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -226,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				412E28DF2425F3B100B7DFB7 /* SearchBarView.swift */,
+				412E29102428333800B7DFB7 /* TableViewHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -289,6 +296,8 @@
 			children = (
 				412E28FB2426420000B7DFB7 /* Array+Util.swift */,
 				412E28FD2426422100B7DFB7 /* UIViewController+Rx.swift */,
+				412E2912242842E200B7DFB7 /* Formatter+Util.swift */,
+				412E29142428477100B7DFB7 /* String+Util.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -611,12 +620,15 @@
 				412E27B82425C14800B7DFB7 /* ViewController.swift in Sources */,
 				412E28FE2426422100B7DFB7 /* UIViewController+Rx.swift in Sources */,
 				412E27B12425B9C600B7DFB7 /* MainViewController.swift in Sources */,
+				412E29152428477100B7DFB7 /* String+Util.swift in Sources */,
 				412E28F82426302300B7DFB7 /* ReactiveViewModel.swift in Sources */,
 				412E29032426F14D00B7DFB7 /* CafeRequester.swift in Sources */,
 				412E28F5242604DE00B7DFB7 /* SearchCafeAPI.swift in Sources */,
 				412E29052427054C00B7DFB7 /* RequestViewModel.swift in Sources */,
+				412E29112428333800B7DFB7 /* TableViewHeader.swift in Sources */,
 				412E290E24275FA800B7DFB7 /* TableViewCell.swift in Sources */,
 				412E28E02425F3B100B7DFB7 /* SearchBarView.swift in Sources */,
+				412E2913242842E200B7DFB7 /* Formatter+Util.swift in Sources */,
 				412E28E92425FE8C00B7DFB7 /* SearchBlogResponseModel.swift in Sources */,
 				412E284C2425C96200B7DFB7 /* SupportSnapkit.swift in Sources */,
 				412E28EB2426028100B7DFB7 /* SearchCafeResponseModel.swift in Sources */,

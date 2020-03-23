@@ -36,7 +36,14 @@ struct SearchBlogDocumentsResponseModel: SearchDocumentResponse, Mappable {
     mutating func mapping(map: Map) {
         name <- map["blogname"]
         contents <- map["contents"]
-        datetime <- (map["datetime"], DateTransform())
+        if let isoDate = map.JSON["datetime"] as? String {
+            let formatter = DateFormatter.iso8601
+            if let date = formatter.date(from: isoDate) {
+                datetime = date
+            } else {
+                datetime = Date(timeIntervalSince1970: 0)
+            }
+        }
         thumbnail <- (map["thumbnail"], URLTransform())
         title <- map["title"]
         url <- (map["url"], URLTransform())

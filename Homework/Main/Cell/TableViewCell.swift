@@ -40,6 +40,7 @@ struct CellPresentableModel {
 class TableViewCell: UITableViewCell {
     struct Const {
         static let cellIdentifier: String = "TableViewCell"
+        static let titleFont: UIFont = UIFont.systemFont(ofSize: 12, weight: .light)
     }
     
     @IBOutlet weak var badgeLabel: UILabel!
@@ -59,7 +60,7 @@ class TableViewCell: UITableViewCell {
         badgeLabel.textAlignment = .center
         badgeLabel.font = .systemFont(ofSize: 15, weight: .semibold)
         nameLabel.font = .systemFont(ofSize: 13, weight: .light)
-        titleLabel.font = .systemFont(ofSize: 12, weight: .light)
+        titleLabel.font = Const.titleFont
         titleLabel.numberOfLines = 2
         dateLabel.font = .systemFont(ofSize: 10, weight: .thin)
 
@@ -83,7 +84,9 @@ class TableViewCell: UITableViewCell {
             self.badgeLabel.backgroundColor = .green
         }
         self.nameLabel.text = pModel.name
-        self.titleLabel.text = pModel.title
+        self.titleLabel.attributedText = pModel.title.htmlAttributed(family: Const.titleFont.familyName,
+                                                                     size: Const.titleFont.pointSize,
+                                                                     color: .black)
         self.dateLabel.text = pModel.date
     }
     

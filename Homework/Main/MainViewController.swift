@@ -14,15 +14,20 @@ final class MainViewController: ViewController {
     
     let viewModel: MainViewModel = MainViewModel()
     
-    let tableView: UITableView = UITableView().then {
+    let sectionHeaderView: TableViewHeader
+    
+    let tableView: UITableView = UITableView(frame: .zero, style: .grouped).then {
         $0.backgroundColor = .white
         $0.register(UINib(nibName: TableViewCell.Const.cellIdentifier,
                           bundle: nil),
                     forCellReuseIdentifier: TableViewCell.Const.cellIdentifier)
-        $0.tableFooterView = UIView()
+        $0.tableFooterView = UIView(frame: .zero)
+        $0.tableHeaderView = UIView(frame: .init(x: 0, y: 0, width: $0.frame.size.width, height: 0.1))
     }
     
     override init(navigationBarConfig: TBNavigationBar.Config) {
+        sectionHeaderView = TableViewHeader(filter: viewModel.currentFilterType,
+                                            sort: viewModel.currentSortType)
         super.init(navigationBarConfig: navigationBarConfig)
     }
 
@@ -35,7 +40,7 @@ final class MainViewController: ViewController {
         setUI()
         rxBind()
     }
-    
+        
     private func setUI() {
         view.backgroundColor = .white
         view.addSubview(tableView)
@@ -72,6 +77,36 @@ final class MainViewController: ViewController {
                 .bind(to: viewModel.input.request)
                 .disposed(by: viewModel.bag)
         }
+        
+        // HeaderView
+        sectionHeaderView.sortButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                actionSheet.addAction(
+                    UIAlertAction(title: MainViewModel.SortType.title.rawValue,
+                                  style: .default, handler: { result in
+                                    let toType: MainViewModel.SortType = .title
+                                    self.sectionHeaderView.sortDidChange(type: toType)
+                                    self.viewModel.input.changeSort.accept(toType)
+                }))
+                actionSheet.addAction(
+                    UIAlertAction(title: MainViewModel.SortType.dateTime.rawValue,
+                                  style: .default,
+                                  handler: { result in
+                                    let toType: MainViewModel.SortType = .dateTime
+                                    self.sectionHeaderView.sortDidChange(type: toType)
+                                    self.viewModel.input.changeSort.accept(toType)
+
+                }))
+                actionSheet.addAction(UIAlertAction(title: "취소",
+                                                    style: .cancel,
+                                                    handler: nil))
+                self.present(actionSheet,
+                             animated: true,
+                             completion: nil)
+            })
+            .disposed(by: viewModel.bag)
     }
 }
 
@@ -97,6 +132,17 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 112
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return sectionHeaderView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

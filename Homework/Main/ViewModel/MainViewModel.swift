@@ -21,17 +21,20 @@ final class MainViewModel: ReactiveViewModel {
             let query: String
         }
         let request: PublishRelay<RequestInfo> = PublishRelay<RequestInfo>()
+        let changeSort: PublishRelay<SortType> =  PublishRelay<SortType>()
+        let changeFilter: PublishRelay<FilterType> =  PublishRelay<FilterType>()
+
     }
     struct Output {
         let updateList: PublishRelay<Void> = PublishRelay<Void>()
     }
     
-    enum FilterType {
+    enum FilterType: String {
         case all
         case blog
         case cafe
     }
-    enum SortType {
+    enum SortType: String {
         case title
         case dateTime
     }
@@ -68,6 +71,16 @@ final class MainViewModel: ReactiveViewModel {
         rxBindForAll(request: input.request.filter { $0.filterType == .all })
         rxBindForOnlyBlog(request: input.request.filter { $0.filterType == .blog })
         rxBindForOnlyCafe(request: input.request.filter { $0.filterType == .cafe })
+        
+        input.changeSort
+            .do(onNext: { [weak self] type in
+                guard let self = self else { return }
+                self.currentSortType = type
+                self.sortItems()
+            })
+            .map { _ in Void() }
+            .bind(to: output.updateList)
+            .disposed(by: bag)
     }
     
     private func rxBindForAll(request: Observable<Input.RequestInfo>) {
@@ -126,7 +139,9 @@ final class MainViewModel: ReactiveViewModel {
         switch self.currentSortType {
         case .title:
             self.items.sort { (first, second) -> Bool in
-                return first.title < second.title
+                let firstString = first.title.removeHTMLTags()
+                let secondString = second.title.removeHTMLTags()
+                return firstString < secondString
             }
         case .dateTime:
             self.items.sort { (first, second) -> Bool in
