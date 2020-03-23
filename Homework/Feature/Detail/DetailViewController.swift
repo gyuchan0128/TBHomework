@@ -10,6 +10,7 @@ import UIKit
 import Then
 import RxSwift
 import RxCocoa
+import RxOptional
 
 final class DetailViewController: ViewController {
     private let contentView: DetailView
@@ -28,6 +29,7 @@ final class DetailViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        rxBind()
     }
     
     private func setUI() {
@@ -72,5 +74,24 @@ final class DetailViewController: ViewController {
         } else {
             contentView.linkStackView.isHidden = true
         }
+    }
+    
+    private func rxBind() {
+        contentView.linkButton.rx.tap
+            .map { [weak self] _ -> URL? in
+                guard let self = self else { return nil }
+                guard let text = self.contentView.urlLinkLabel.text else { return nil }
+                return URL(string: text)
+            }
+            .filterNil()
+            .subscribe(onNext: { [weak self] url in
+                guard let self = self else { return }
+                let vc = WebViewController(navigationBarConfig: .title(self.viewModel.title?.htmlDecoded ?? "",
+                                                                       true,
+                                                                       false),
+                                           url: url)
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: viewModel.bag)
     }
 }

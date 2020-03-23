@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 final class DetailViewModel {
     private let model: SearchDocumentResponse
+    let bag: DisposeBag = DisposeBag()
     
     init(model: SearchDocumentResponse) {
         self.model = model
