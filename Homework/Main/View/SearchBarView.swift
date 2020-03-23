@@ -28,6 +28,7 @@ final class SearchTextField: UITextField {
 final class SearchBarView: UIView {
     let searchBar: UITextField = SearchTextField().then {
         $0.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        $0.autocorrectionType = .no
     }
     let button: UIButton = UIButton(type: .custom).then {
         $0.setTitle("검색", for: .normal)

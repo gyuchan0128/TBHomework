@@ -12,6 +12,10 @@ import Then
 
 final class TableViewHeader: UIView {
     
+    let stackView: UIStackView = UIStackView().then {
+        $0.axis = .horizontal
+    }
+    
     let filterButton: UIButton = UIButton()
     
     let sortButton: UIButton = UIButton()
@@ -19,21 +23,45 @@ final class TableViewHeader: UIView {
     init(filter: MainViewModel.FilterType, sort: MainViewModel.SortType) {
         super.init(frame: .zero)
         
+        let separatorView: UIView = UIView().then {
+            $0.backgroundColor = UIColor.separatorColor()
+        }
+        
+        let bottomBorderLine: UIView = UIView().then {
+            $0.backgroundColor = UIColor.separatorColor()
+        }
+        
+        let topBorderLine: UIView = UIView().then {
+            $0.backgroundColor = UIColor.separatorColor()
+        }
+        
         filterButton.setTitle(filter.rawValue, for: .normal)
         filterButton.setTitleColor(.blue, for: .normal)
         sortButton.setTitle(sort.rawValue, for: .normal)
         sortButton.setTitleColor(.blue, for: .normal)
 
-        addSubview(filterButton)
-        addSubview(sortButton)
-        
-        filterButton.snp.makeConstraints { make in
-            make.leading.top.bottom.equalToSuperview()
-            make.trailing.equalTo(sortButton.snp.leading)
+        addSubview(stackView)
+        addSubview(topBorderLine)
+        addSubview(bottomBorderLine)
+        stackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
-        
+        topBorderLine.snp.makeConstraints { make in
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(1)
+        }
+        bottomBorderLine.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(1)
+        }
+        stackView.addArrangedSubview(filterButton)
+        filterButton.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        stackView.addArrangedSubview(separatorView)
+        separatorView.snp.makeConstraints { make in
+            make.width.equalTo(1)
+        }
+        stackView.addArrangedSubview(sortButton)
         sortButton.snp.makeConstraints { make in
-            make.top.bottom.trailing.equalToSuperview()
             make.width.equalTo(80)
         }
     }

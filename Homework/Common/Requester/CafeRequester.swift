@@ -68,6 +68,7 @@ final class CafeRequester: RequestViewModel, PageableRequest {
                                                        size: self.sizeOfPage))
                 return request
             }
+            .observeOn(MainScheduler.instance)
             // 요청 완료 후 property update
             .do(onNext: { [weak self] response in
                 guard let self = self else { return }

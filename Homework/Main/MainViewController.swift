@@ -55,6 +55,7 @@ final class MainViewController: ViewController {
         viewModel.output.updateList.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
+                self.tableView.setContentOffset(self.tableView.contentOffset, animated: false)
                 self.tableView.reloadData()
             })
             .disposed(by: viewModel.bag)
