@@ -15,12 +15,18 @@ final class MainViewModel: ReactiveViewModel {
         static let pagingSize: Int = 25
     }
     struct Input {
-        struct RequestInfo {
+        struct RequestInfo: Equatable {
             let isRefresh: Bool
             let filterType: FilterType
             let query: String
+            
+            static func == (lhs: RequestInfo, rhs: RequestInfo) -> Bool {
+                return lhs.isRefresh == rhs.isRefresh &&
+                    lhs.filterType == rhs.filterType &&
+                    lhs.query == rhs.query
+            }
         }
-        let request: PublishRelay<RequestInfo> = PublishRelay<RequestInfo>()
+        let nextRequest: PublishRelay<RequestInfo> = PublishRelay<RequestInfo>()
         let changeSort: PublishRelay<SortType> =  PublishRelay<SortType>()
         let changeFilter: PublishRelay<FilterType> =  PublishRelay<FilterType>()
 
@@ -30,13 +36,13 @@ final class MainViewModel: ReactiveViewModel {
     }
     
     enum FilterType: String {
-        case all
-        case blog
-        case cafe
+        case all = "All"
+        case blog = "Blog"
+        case cafe = "Cafe"
     }
     enum SortType: String {
-        case title
-        case dateTime
+        case title      = "Title"
+        case dateTime   = "Datetime"
     }
     
     let bag: DisposeBag = DisposeBag()
@@ -57,7 +63,10 @@ final class MainViewModel: ReactiveViewModel {
     }
     
     private func rxBind() {
-        input.request
+        let request = input.nextRequest
+            .filter { return $0.query.count > 0 }
+        request
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] info in
                 guard let self = self else { return }
                 self.currentFilterType = info.filterType
@@ -68,11 +77,12 @@ final class MainViewModel: ReactiveViewModel {
             })
             .disposed(by: bag)
         
-        rxBindForAll(request: input.request.filter { $0.filterType == .all })
-        rxBindForOnlyBlog(request: input.request.filter { $0.filterType == .blog })
-        rxBindForOnlyCafe(request: input.request.filter { $0.filterType == .cafe })
+        rxBindForAll(request: request.filter { $0.filterType == .all })
+        rxBindForOnlyBlog(request: request.filter { $0.filterType == .blog })
+        rxBindForOnlyCafe(request: request.filter { $0.filterType == .cafe })
         
         input.changeSort
+            .observeOn(MainScheduler.instance)
             .do(onNext: { [weak self] type in
                 guard let self = self else { return }
                 self.currentSortType = type
@@ -80,6 +90,23 @@ final class MainViewModel: ReactiveViewModel {
             })
             .map { _ in Void() }
             .bind(to: output.updateList)
+            .disposed(by: bag)
+        
+        input.changeFilter
+            .observeOn(MainScheduler.instance)
+            .do(onNext: { [weak self] type in
+                guard let self = self else { return }
+                self.currentFilterType = type
+            })
+            .map { [weak self] type -> Input.RequestInfo? in
+                guard let self = self else { return nil }
+                return Input.RequestInfo(isRefresh: true,
+                                         filterType: type,
+                                         query: self.beforeQuery)
+                
+            }
+            .filterNil()
+            .bind(to: input.nextRequest)
             .disposed(by: bag)
     }
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 struct CellPresentableModel {
     enum FilterType: String {
@@ -14,6 +15,7 @@ struct CellPresentableModel {
         case cafe = "C"
     }
     let title: String       // title
+    let titleAttributedString: NSAttributedString?
     let imageURL: URL?
     let type: FilterType
     let name: String        // blog name or cafe name
@@ -21,6 +23,9 @@ struct CellPresentableModel {
     
     init(title: String, imageURL: URL?, type: ListRequestType, name: String, date: Date) {
         self.title = title
+        self.titleAttributedString = title.htmlAttributed(family: TableViewCell.Const.titleFont.familyName,
+                                                          size: TableViewCell.Const.titleFont.pointSize,
+                                                          color: .black)
         self.imageURL = imageURL
         self.name = name
         self.type = type.toPresentableFilterType()
@@ -67,7 +72,7 @@ class TableViewCell: UITableViewCell {
         mainStackView.spacing = 16
         leftStackView.spacing = 8
         leftTopStackView.spacing = 4
-
+        thumbnailImageView.contentMode = .scaleAspectFill
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -76,18 +81,22 @@ class TableViewCell: UITableViewCell {
     
     func bind(pModel: CellPresentableModel) {
         self.badgeLabel.text = pModel.type.rawValue
+        self.badgeLabel.textColor = .white
         switch pModel.type {
         case .blog:
-            self.badgeLabel.textColor = .white
             self.badgeLabel.backgroundColor = .blue
         case .cafe:
             self.badgeLabel.backgroundColor = .green
         }
         self.nameLabel.text = pModel.name
-        self.titleLabel.attributedText = pModel.title.htmlAttributed(family: Const.titleFont.familyName,
-                                                                     size: Const.titleFont.pointSize,
-                                                                     color: .black)
+        self.titleLabel.attributedText = pModel.titleAttributedString
         self.dateLabel.text = pModel.date
+        if let imageURL = pModel.imageURL {
+            self.thumbnailImageView.af_setImage(withURL: imageURL)
+            self.thumbnailImageView.isHidden = false
+        } else {
+            self.thumbnailImageView.isHidden = true
+        }
     }
     
 }

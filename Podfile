@@ -14,7 +14,8 @@ target 'Homework' do
   pod 'RxAlamofire'
   pod 'ObjectMapper'
   pod 'Then'
-
+  pod 'AlamofireImage'
+  pod 'SwiftyUserDefaults'
 
   # Pods for Homework
 

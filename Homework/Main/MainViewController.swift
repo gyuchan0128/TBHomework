@@ -9,6 +9,8 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+import RxCocoa
 
 final class MainViewController: ViewController {
     
@@ -53,6 +55,7 @@ final class MainViewController: ViewController {
     }
     private func rxBind() {
         viewModel.output.updateList.asObservable()
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.tableView.setContentOffset(self.tableView.contentOffset, animated: false)
@@ -61,8 +64,7 @@ final class MainViewController: ViewController {
             .disposed(by: viewModel.bag)
         
         if let view = customNavigationBar.customView as? SearchBarView {
-            view.button.rx.tap
-                .map { view.searchBar.text }
+            view.button.rx.tap.withLatestFrom(view.searchBar.rx.text)
                 .filterNil()
                 .map({ [weak self] query -> MainViewModel.Input.RequestInfo? in
                     guard let self = self else { return nil }
@@ -71,12 +73,15 @@ final class MainViewController: ViewController {
                                                            query: query)
                 })
                 .filterNil()
+                .observeOn(MainScheduler.instance)
                 .do(onNext: { [weak self] _ in
                     guard let self = self else { return }
                     self.view.endEditing(true)
+                    self.tableView.setContentOffset(.zero, animated: false)
                 })
-                .bind(to: viewModel.input.request)
+                .bind(to: viewModel.input.nextRequest)
                 .disposed(by: viewModel.bag)
+            view.searchBar.delegate = self
         }
         
         // HeaderView
@@ -98,6 +103,43 @@ final class MainViewController: ViewController {
                                     let toType: MainViewModel.SortType = .dateTime
                                     self.sectionHeaderView.sortDidChange(type: toType)
                                     self.viewModel.input.changeSort.accept(toType)
+
+                }))
+                actionSheet.addAction(UIAlertAction(title: "취소",
+                                                    style: .cancel,
+                                                    handler: nil))
+                self.present(actionSheet,
+                             animated: true,
+                             completion: nil)
+            })
+            .disposed(by: viewModel.bag)
+        sectionHeaderView.filterButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                actionSheet.addAction(
+                    UIAlertAction(title: MainViewModel.FilterType.all.rawValue,
+                                  style: .default, handler: { result in
+                                    let toType: MainViewModel.FilterType = .all
+                                    self.sectionHeaderView.filterDidChange(type: toType)
+                                    self.viewModel.input.changeFilter.accept(toType)
+                }))
+                actionSheet.addAction(
+                    UIAlertAction(title: MainViewModel.FilterType.blog.rawValue,
+                                  style: .default,
+                                  handler: { result in
+                                    let toType: MainViewModel.FilterType = .blog
+                                    self.sectionHeaderView.filterDidChange(type: toType)
+                                    self.viewModel.input.changeFilter.accept(toType)
+
+                }))
+                actionSheet.addAction(
+                    UIAlertAction(title: MainViewModel.FilterType.cafe.rawValue,
+                                  style: .default,
+                                  handler: { result in
+                                    let toType: MainViewModel.FilterType = .cafe
+                                    self.sectionHeaderView.filterDidChange(type: toType)
+                                    self.viewModel.input.changeFilter.accept(toType)
 
                 }))
                 actionSheet.addAction(UIAlertAction(title: "취소",
@@ -148,10 +190,17 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row > viewModel.items.count-5 {
-            viewModel.input.request.accept(MainViewModel.Input.RequestInfo(isRefresh: false,
-                                                                           filterType: viewModel.currentFilterType,
-                                                                           query: viewModel.beforeQuery))
+            viewModel.input.nextRequest.accept(MainViewModel.Input.RequestInfo(isRefresh: false,
+                                                                               filterType: viewModel.currentFilterType,
+                                                                               query: viewModel.beforeQuery))
         }
     }
 
+}
+
+extension MainViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
