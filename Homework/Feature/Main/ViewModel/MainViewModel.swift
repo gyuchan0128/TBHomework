@@ -127,6 +127,7 @@ final class MainViewModel: ReactiveViewModel {
         
         blogRequester.output.items
             .asObservable()
+            .observeOn(MainScheduler.instance)
             .do(onNext: { [weak self] items in
                 guard let self = self else { return }
                 self.items.append(contentsOf: items)
@@ -148,6 +149,7 @@ final class MainViewModel: ReactiveViewModel {
         
         cafeRequester.output.items
             .asObservable()
+            .observeOn(MainScheduler.instance)
             .do(onNext: { [weak self] items in
                 guard let self = self else { return }
                 self.items.append(contentsOf: items)

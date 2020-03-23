@@ -41,4 +41,3 @@ public extension Reactive where Base: UIViewController {
         return ControlEvent(events: source)
     }
 }
-

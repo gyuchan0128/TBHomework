@@ -15,17 +15,13 @@ struct CellPresentableModel {
         case cafe = "C"
     }
     let title: String       // title
-    let titleAttributedString: NSAttributedString?
     let imageURL: URL?
     let type: FilterType
     let name: String        // blog name or cafe name
     let date: String        // 오늘, 어제, 그외(YYYY년 MM월 DD일)
     
     init(title: String, imageURL: URL?, type: ListRequestType, name: String, date: Date) {
-        self.title = title
-        self.titleAttributedString = title.htmlAttributed(family: TableViewCell.Const.titleFont.familyName,
-                                                          size: TableViewCell.Const.titleFont.pointSize,
-                                                          color: .black)
+        self.title = title.htmlDecoded
         self.imageURL = imageURL
         self.name = name
         self.type = type.toPresentableFilterType()
@@ -89,7 +85,7 @@ class TableViewCell: UITableViewCell {
             self.badgeLabel.backgroundColor = .green
         }
         self.nameLabel.text = pModel.name
-        self.titleLabel.attributedText = pModel.titleAttributedString
+        self.titleLabel.text = pModel.title
         self.dateLabel.text = pModel.date
         if let imageURL = pModel.imageURL {
             self.thumbnailImageView.af_setImage(withURL: imageURL)

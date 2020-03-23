@@ -9,6 +9,8 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+import RxCocoa
 
 final class TBNavigationBar: UIView {
     enum Config {
@@ -65,8 +67,6 @@ final class TBNavigationBar: UIView {
     }
 
     private func setUI() {
-        
-        
         switch config {
         case .title(let string, let visibleLeft, let visibleRight):
             let leftStackView: UIStackView = UIStackView().then {
@@ -136,6 +136,7 @@ final class TBNavigationBar: UIView {
 
 class ViewController: UIViewController {
     let customNavigationBar: TBNavigationBar
+    let bag: DisposeBag = DisposeBag()
     
     init(navigationBarConfig: TBNavigationBar.Config) {
         customNavigationBar = TBNavigationBar(config: navigationBarConfig)
@@ -144,6 +145,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
+
         view.addSubview(customNavigationBar)
         customNavigationBar.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -154,10 +157,21 @@ class ViewController: UIViewController {
                 make.height.equalTo(TBNavigationBar.Frame.height+UIApplication.shared.statusBarFrame.height)
             }
         }
+        
+        rxBind()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func rxBind() {
+        customNavigationBar.leftButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: bag)
     }
 }
 

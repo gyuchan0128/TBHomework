@@ -23,7 +23,7 @@ final class MainViewController: ViewController {
         $0.register(UINib(nibName: TableViewCell.Const.cellIdentifier,
                           bundle: nil),
                     forCellReuseIdentifier: TableViewCell.Const.cellIdentifier)
-        $0.tableFooterView = UIView(frame: .zero)
+        $0.tableFooterView = UIView(frame: .init(x: 0, y: 0, width: $0.frame.size.width, height: 0.1))
         $0.tableHeaderView = UIView(frame: .init(x: 0, y: 0, width: $0.frame.size.width, height: 0.1))
     }
     
@@ -44,7 +44,6 @@ final class MainViewController: ViewController {
     }
         
     private func setUI() {
-        view.backgroundColor = .white
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -58,7 +57,6 @@ final class MainViewController: ViewController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                self.tableView.setContentOffset(self.tableView.contentOffset, animated: false)
                 self.tableView.reloadData()
             })
             .disposed(by: viewModel.bag)
@@ -189,11 +187,22 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row > viewModel.items.count-5 {
+        if indexPath.row == viewModel.items.count-5 {
             viewModel.input.nextRequest.accept(MainViewModel.Input.RequestInfo(isRefresh: false,
                                                                                filterType: viewModel.currentFilterType,
                                                                                query: viewModel.beforeQuery))
         }
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let item = viewModel.items[safe: indexPath.row] else {
+            return
+        }
+
+        let vc: DetailViewController = DetailViewController(navigationBarConfig: .title(item.type.rawValue,
+                                                                                        true,
+                                                                                        false),
+                                                            viewModel: DetailViewModel(model: item))
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }

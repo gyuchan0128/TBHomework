@@ -12,9 +12,9 @@ import RxSwift
 import RxCocoa
 import ObjectMapper
 
-enum ListRequestType: Hashable {
-    case blog
-    case cafe
+enum ListRequestType: String, Hashable {
+    case blog = "Blog"
+    case cafe = "Cafe"
     
     func toPresentableFilterType() -> CellPresentableModel.FilterType {
         switch self {
@@ -53,16 +53,6 @@ extension ObservableType {
         return flatMap { data -> Observable<T?> in
             let json = data as AnyObject
             guard let object = Mapper<T>().map(JSONObject: json) else {
-                return .just(nil)
-            }
-            return Observable.just(object)
-        }
-    }
-
-    public func mapArray<T: Mappable>(type: T.Type) -> Observable<[T]?> {
-        return flatMap { data -> Observable<[T]?> in
-            let json = data as AnyObject
-            guard let object = Mapper<T>().mapArray(JSONObject: json) else {
                 return .just(nil)
             }
             return Observable.just(object)

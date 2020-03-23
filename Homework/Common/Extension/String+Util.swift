@@ -9,28 +9,13 @@
 import UIKit
 
 extension String {
-    func htmlAttributed(family: String?, size: CGFloat, color: UIColor) -> NSAttributedString? {
-        do {
-            let htmlCSSString = "<style>" +
-                "html *" +
-                "{" +
-                "font-size: \(size)pt !important;" +
-                "color: #\(color.hexString) !important;" +
-                "font-family: \(family ?? "Apple SD Gothic Neo"), Apple SD Gothic Neo !important;" +
-            "}</style> \(self)"
+    var htmlDecoded: String {
+        let decoded = try? NSAttributedString(data: Data(utf8), options: [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ], documentAttributes: nil).string
 
-            guard let data = htmlCSSString.data(using: String.Encoding.utf8) else {
-                return nil
-            }
-
-            return try NSAttributedString(data: data,
-                                          options: [.documentType: NSAttributedString.DocumentType.html,
-                                                    .characterEncoding: String.Encoding.utf8.rawValue],
-                                          documentAttributes: nil)
-        } catch {
-            print("error: ", error)
-            return nil
-        }
+        return decoded ?? self
     }
     
     func removeHTMLTags() -> String {
@@ -46,6 +31,6 @@ extension UIColor {
         var a: CGFloat = 0
         getRed(&r, green: &g, blue: &b, alpha: &a)
         let rgb: Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
-        return NSString(format:"#%06x", rgb) as String
+        return NSString(format: "#%06x", rgb) as String
     }
 }

@@ -23,6 +23,7 @@ final class NavigationController: UINavigationController {
     }
     private func config() {
         isNavigationBarHidden = true
+        interactivePopGestureRecognizer?.isEnabled = true
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
