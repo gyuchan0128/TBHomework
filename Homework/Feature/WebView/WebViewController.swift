@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import SnapKit
+import SwiftyUserDefaults
 
 final class WebViewController: ViewController {
 
@@ -20,6 +21,7 @@ final class WebViewController: ViewController {
         self.url = url
         super.init(navigationBarConfig: navigationBarConfig)
         webView.load(URLRequest(url: url))
+        Defaults[\.viewed].append(url)
     }
     
     required init?(coder: NSCoder) {
@@ -38,4 +40,8 @@ final class WebViewController: ViewController {
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
+}
+
+extension DefaultsKeys {
+    var viewed: DefaultsKey<[URL]> { .init("viewed", defaultValue: []) }
 }

@@ -53,6 +53,11 @@ final class MainViewController: ViewController {
         }
     }
     private func rxBind() {
+        rx.viewWillAppear.subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.tableView.reloadData()
+            })
+            .disposed(by: viewModel.bag)
         viewModel.output.updateList.asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
@@ -163,12 +168,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         guard let item = viewModel.items[safe: indexPath.row] else {
             return cell
         }
-        
+        cell.selectionStyle = .none
         cell.bind(pModel: CellPresentableModel(title: item.title,
                                                imageURL: item.thumbnail,
                                                type: item.type,
                                                name: item.name ?? "",
-                                               date: item.datetime))
+                                               date: item.datetime,
+                                               linkURL: item.url))
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -210,6 +216,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 extension MainViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        viewModel.input.nextRequest.accept(MainViewModel.Input.RequestInfo(isRefresh: true,
+                                                                           filterType: viewModel.currentFilterType,
+                                                                           query: viewModel.beforeQuery))
         return true
     }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import AlamofireImage
+import SwiftyUserDefaults
 
 struct CellPresentableModel {
     enum FilterType: String {
@@ -19,8 +20,9 @@ struct CellPresentableModel {
     let type: FilterType
     let name: String        // blog name or cafe name
     let date: String        // 오늘, 어제, 그외(YYYY년 MM월 DD일)
+    let isDimmed: Bool      // 본 적이 있으면 true
     
-    init(title: String, imageURL: URL?, type: ListRequestType, name: String, date: Date) {
+    init(title: String, imageURL: URL?, type: ListRequestType, name: String, date: Date, linkURL: URL?) {
         self.title = title.htmlDecoded
         self.imageURL = imageURL
         self.name = name
@@ -34,6 +36,12 @@ struct CellPresentableModel {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy년 MM월 dd일"
             self.date = dateFormatter.string(from: date)
+        }
+        
+        if let link = linkURL, Defaults[\.viewed].contains(link) {
+            self.isDimmed = true
+        } else {
+            self.isDimmed = false
         }
     }
 }
@@ -56,6 +64,8 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var leftStackView: UIStackView!
     @IBOutlet weak var leftTopStackView: UIStackView!
     
+    @IBOutlet weak var dimmedView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         badgeLabel.textAlignment = .center
@@ -69,6 +79,9 @@ class TableViewCell: UITableViewCell {
         leftStackView.spacing = 8
         leftTopStackView.spacing = 4
         thumbnailImageView.contentMode = .scaleAspectFill
+        
+        dimmedView.backgroundColor = .init(white: 0.0, alpha: 0.2)
+        dimmedView.isUserInteractionEnabled = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -91,7 +104,14 @@ class TableViewCell: UITableViewCell {
             self.thumbnailImageView.af_setImage(withURL: imageURL)
             self.thumbnailImageView.isHidden = false
         } else {
+            self.thumbnailImageView.image = nil
             self.thumbnailImageView.isHidden = true
+        }
+        
+        if pModel.isDimmed {
+            dimmedView.isHidden = false
+        } else {
+            dimmedView.isHidden = true
         }
     }
     

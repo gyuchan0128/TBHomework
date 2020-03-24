@@ -66,18 +66,27 @@
                             </imageView>
                         </subviews>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PNU-oG-dxI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="112"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="PNU-oG-dxI" secondAttribute="bottom" id="0YO-4b-nCX"/>
                     <constraint firstItem="jig-Rp-qBH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="8fJ-jW-1XH"/>
+                    <constraint firstItem="PNU-oG-dxI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="XNH-MF-qzc"/>
                     <constraint firstAttribute="bottom" secondItem="jig-Rp-qBH" secondAttribute="bottom" constant="16" id="fac-vu-Xo6"/>
                     <constraint firstAttribute="trailing" secondItem="jig-Rp-qBH" secondAttribute="trailing" constant="16" id="mqh-cf-8bX"/>
+                    <constraint firstAttribute="trailing" secondItem="PNU-oG-dxI" secondAttribute="trailing" id="svH-eQ-7KW"/>
                     <constraint firstItem="jig-Rp-qBH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="u9j-PB-IbE"/>
+                    <constraint firstItem="PNU-oG-dxI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="yf1-mX-1hT"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="badgeLabel" destination="TUw-RR-ean" id="MBD-yf-037"/>
                 <outlet property="dateLabel" destination="hNq-CM-LKC" id="ZRe-vr-yJU"/>
+                <outlet property="dimmedView" destination="PNU-oG-dxI" id="lTS-LS-vqC"/>
                 <outlet property="leftStackView" destination="DvI-0y-Tqq" id="PlL-BS-Cbd"/>
                 <outlet property="leftTopStackView" destination="DBV-qt-nmf" id="8Bw-S7-AHt"/>
                 <outlet property="mainStackView" destination="jig-Rp-qBH" id="NRK-2F-SM4"/>
