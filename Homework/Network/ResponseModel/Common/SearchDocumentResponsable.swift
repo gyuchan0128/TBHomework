@@ -8,7 +8,21 @@
 
 import Foundation
 
-protocol SearchDocumentResponse {
+enum ListRequestType: String, Hashable {
+    case blog = "Blog"
+    case cafe = "Cafe"
+    
+    func toPresentableFilterType() -> CellPresentableModel.FilterType {
+        switch self {
+        case .blog:
+            return .blog
+        case .cafe:
+            return .cafe
+        }
+    }
+}
+
+protocol SearchDocumentResponsable {
     var type: ListRequestType { get }   // 값이 반드시 존재한다.
     var name: String? { get }
     var contents: String? { get }

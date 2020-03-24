@@ -69,60 +69,9 @@ final class TBNavigationBar: UIView {
     private func setUI() {
         switch config {
         case .title(let string, let visibleLeft, let visibleRight):
-            let leftStackView: UIStackView = UIStackView().then {
-                $0.axis = .horizontal
-                $0.spacing = 4
-            }
-            stackView.addArrangedSubview(leftStackView)
-            leftStackView.snp.makeConstraints { make in
-                make.width.equalTo(Frame.buttonItemSize)
-            }
-            
-            titleLabel.text = string
-            titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
-            stackView.addArrangedSubview(titleLabel)
-            titleLabel.snp.makeConstraints { make in
-                make.height.equalTo(Frame.buttonItemSize)
-            }
-            
-            let rightStackView: UIStackView = UIStackView().then {
-                $0.axis = .horizontal
-                $0.spacing = 4
-            }
-            stackView.addArrangedSubview(rightStackView)
-            rightStackView.snp.makeConstraints { make in
-                make.width.equalTo(Frame.buttonItemSize)
-            }
-            
-            if visibleLeft {
-                leftStackView.addArrangedSubview(leftButton)
-                leftButton.snp.makeConstraints { make in
-                    make.width.height.equalTo(Frame.buttonItemSize)
-                }
-            }
-            if visibleRight {
-                rightStackView.addArrangedSubview(rightButton)
-                rightButton.snp.makeConstraints { make in
-                    make.width.height.equalTo(Frame.buttonItemSize)
-                }
-            }
+            setUI(title: string, visibleLeft: visibleLeft, visibleRight: visibleRight)
         case .view(let view, let visibleLeft):
-            view.setContentHuggingPriority(.defaultLow, for: .horizontal)
-            stackView.addArrangedSubview(view)
-            if visibleLeft {
-                let leftStackView: UIStackView = UIStackView().then {
-                    $0.axis = .horizontal
-                    $0.spacing = 4
-                }
-                stackView.addArrangedSubview(leftStackView)
-                leftStackView.addArrangedSubview(leftButton)
-                leftButton.snp.makeConstraints { make in
-                    make.width.height.equalTo(Frame.buttonItemSize)
-                }
-                leftStackView.snp.makeConstraints { make in
-                    make.width.equalTo(Frame.buttonItemSize)
-                }
-            }
+            setUI(customView: view, visibleLeft: visibleLeft)
         }
         
         addSubview(stackView)
@@ -130,6 +79,64 @@ final class TBNavigationBar: UIView {
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
             make.height.equalTo(Frame.height)
+        }
+    }
+    
+    private func setUI(title: String, visibleLeft: Bool, visibleRight: Bool) {
+        let leftStackView: UIStackView = UIStackView().then {
+            $0.axis = .horizontal
+            $0.spacing = 4
+        }
+        stackView.addArrangedSubview(leftStackView)
+        leftStackView.snp.makeConstraints { make in
+            make.width.equalTo(Frame.buttonItemSize)
+        }
+        
+        titleLabel.text = title
+        titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        stackView.addArrangedSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.height.equalTo(Frame.buttonItemSize)
+        }
+        
+        let rightStackView: UIStackView = UIStackView().then {
+            $0.axis = .horizontal
+            $0.spacing = 4
+        }
+        stackView.addArrangedSubview(rightStackView)
+        rightStackView.snp.makeConstraints { make in
+            make.width.equalTo(Frame.buttonItemSize)
+        }
+        
+        if visibleLeft {
+            leftStackView.addArrangedSubview(leftButton)
+            leftButton.snp.makeConstraints { make in
+                make.width.height.equalTo(Frame.buttonItemSize)
+            }
+        }
+        if visibleRight {
+            rightStackView.addArrangedSubview(rightButton)
+            rightButton.snp.makeConstraints { make in
+                make.width.height.equalTo(Frame.buttonItemSize)
+            }
+        }
+    }
+    private func setUI(customView: UIView, visibleLeft: Bool) {
+        customView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        stackView.addArrangedSubview(customView)
+        if visibleLeft {
+            let leftStackView: UIStackView = UIStackView().then {
+                $0.axis = .horizontal
+                $0.spacing = 4
+            }
+            stackView.addArrangedSubview(leftStackView)
+            leftStackView.addArrangedSubview(leftButton)
+            leftButton.snp.makeConstraints { make in
+                make.width.height.equalTo(Frame.buttonItemSize)
+            }
+            leftStackView.snp.makeConstraints { make in
+                make.width.equalTo(Frame.buttonItemSize)
+            }
         }
     }
 }
@@ -152,7 +159,7 @@ class ViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
             if UIDevice.current.hasNotch {
-                make.height.equalTo(TBNavigationBar.Frame.height+safeAreaTopHeight)
+                make.height.equalTo(TBNavigationBar.Frame.height+self.safeAreaTopHeight)
             } else {
                 make.height.equalTo(TBNavigationBar.Frame.height+UIApplication.shared.statusBarFrame.height)
             }
@@ -167,31 +174,11 @@ class ViewController: UIViewController {
     
     private func rxBind() {
         customNavigationBar.leftButton.rx.tap
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.navigationController?.popViewController(animated: true)
             })
             .disposed(by: bag)
-    }
-}
-
-extension ViewController {
-    var safeAreaTopHeight: CGFloat {
-        if #available(iOS 11.0, *) {
-            return UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
-        } else {
-            return UIApplication.shared.statusBarFrame.height
-        }
-    }
-}
-
-extension UIDevice {
-    var hasNotch: Bool {
-        if #available(iOS 11.0, *) {
-            let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
-            return bottom > 0
-        } else {
-            return false
-        }
     }
 }

@@ -23,7 +23,7 @@ struct CellPresentableModel {
     let isDimmed: Bool      // 본 적이 있으면 true
     
     init(title: String, imageURL: URL?, type: ListRequestType, name: String, date: Date, linkURL: URL?) {
-        self.title = title.htmlDecoded
+        self.title = title
         self.imageURL = imageURL
         self.name = name
         self.type = type.toPresentableFilterType()

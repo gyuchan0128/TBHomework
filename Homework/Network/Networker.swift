@@ -12,25 +12,8 @@ import RxSwift
 import RxCocoa
 import ObjectMapper
 
-enum ListRequestType: String, Hashable {
-    case blog = "Blog"
-    case cafe = "Cafe"
-    
-    func toPresentableFilterType() -> CellPresentableModel.FilterType {
-        switch self {
-        case .blog:
-            return .blog
-        case .cafe:
-            return .cafe
-        }
-    }
-}
-
 struct Networker {
     private let manager = SessionManager.default
-    
-    init() {
-    }
     
     private func commonHeader() -> [String: String] {
         return ["Authorization": "KakaoAK eb4859c8095d99411e0c184b3bb36bb0"]

@@ -33,7 +33,7 @@ class RequestViewModel: ReactiveViewModel {
         let nextRequest: PublishRelay<RequestInfo> = PublishRelay<RequestInfo>()
     }
     struct Output {
-        let items: PublishRelay<[SearchDocumentResponse]> = PublishRelay<[SearchDocumentResponse]>()
+        let items: PublishRelay<[SearchDocumentResponsable]> = PublishRelay<[SearchDocumentResponsable]>()
     }
 
     let bag: DisposeBag = DisposeBag()

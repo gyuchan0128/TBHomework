@@ -8,7 +8,7 @@
 
 import ObjectMapper
 
-struct SearchBlogResponseModel: Mappable {
+struct SearchBlogResponseModel: ResponseObject {
     var documents: [SearchBlogDocumentsResponseModel]?
     var meta: SearchMetaResponseModel?
 
@@ -21,7 +21,7 @@ struct SearchBlogResponseModel: Mappable {
     }
 }
 
-struct SearchBlogDocumentsResponseModel: SearchDocumentResponse, Mappable {
+struct SearchBlogDocumentsResponseModel: SearchDocumentResponsable, Mappable {
     var type: ListRequestType = .blog
     var name: String?
     var contents: String?
@@ -37,7 +37,7 @@ struct SearchBlogDocumentsResponseModel: SearchDocumentResponse, Mappable {
         name <- map["blogname"]
         contents <- map["contents"]
         if let isoDate = map.JSON["datetime"] as? String {
-            let formatter = DateFormatter.iso8601
+            let formatter = DateFormatter().iso8601()
             if let date = formatter.date(from: isoDate) {
                 datetime = date
             } else {

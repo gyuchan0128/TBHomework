@@ -11,10 +11,10 @@ import RxSwift
 import RxCocoa
 
 final class DetailViewModel {
-    private let model: SearchDocumentResponse
+    private let model: SearchDocumentResponsable
     let bag: DisposeBag = DisposeBag()
     
-    init(model: SearchDocumentResponse) {
+    init(model: SearchDocumentResponsable) {
         self.model = model
     }
     
@@ -39,7 +39,7 @@ final class DetailViewModel {
     }
     
     var dateTime: String? {
-        let dateFormatter = DateFormatter.iso8601
+        let dateFormatter = DateFormatter().iso8601()
         dateFormatter.dateFormat = "yyyy년 MM월 dd일 a hh시 mm분"
         return dateFormatter.string(from: model.datetime)
     }

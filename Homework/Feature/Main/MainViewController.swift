@@ -11,7 +11,6 @@ import SnapKit
 import Then
 import RxSwift
 import RxCocoa
-import SwiftyUserDefaults
 
 final class MainViewController: ViewController {
     
@@ -44,6 +43,8 @@ final class MainViewController: ViewController {
         super.viewDidLoad()
         setUI()
         rxBind()
+        rxBindOfNavigationBar()
+        rxBindOfSectionHeader()
     }
         
     private func setUI() {
@@ -65,6 +66,7 @@ final class MainViewController: ViewController {
             make.height.equalTo(220)
         }
     }
+    
     private func rxBind() {
         rx.viewWillAppear.subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
@@ -78,7 +80,9 @@ final class MainViewController: ViewController {
                 self.tableView.reloadData()
             })
             .disposed(by: viewModel.bag)
-        
+    }
+    
+    private func rxBindOfNavigationBar() {
         if let view = customNavigationBar.customView as? SearchBarView {
             view.button.rx.tap.withLatestFrom(view.searchBar.rx.text)
                 .filterNil()
@@ -92,7 +96,7 @@ final class MainViewController: ViewController {
                 .observeOn(MainScheduler.instance)
                 .do(onNext: { [weak self] info in
                     guard let self = self else { return }
-                    self.addRecentHistory(query: info.query)
+                    self.viewModel.addRecentHistory(query: info.query)
                     self.recentView.isHidden = true
                     self.view.endEditing(true)
                     self.tableView.setContentOffset(.zero, animated: false)
@@ -105,7 +109,7 @@ final class MainViewController: ViewController {
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: { [weak self]  in
                     guard let self = self else { return }
-                    if Defaults[\.recent].count > 0 {
+                    if self.viewModel.recentList.count > 0 {
                         self.recentView.isHidden = false
                         self.recentView.tableView.reloadData()
                     } else {
@@ -114,8 +118,19 @@ final class MainViewController: ViewController {
                 })
                 .disposed(by: viewModel.bag)
         }
+    }
+    
+    private func rxBindOfSectionHeader() {
         
-        // HeaderView
+        func sortTypeDidChanged(toType: MainViewModel.SortType) {
+            self.sectionHeaderView.sortDidChange(type: toType)
+            self.viewModel.input.changeSort.accept(toType)
+        }
+        func filterTypeDidChanged(toType: MainViewModel.FilterType) {
+            self.sectionHeaderView.filterDidChange(type: toType)
+            self.viewModel.input.changeFilter.accept(toType)
+        }
+        
         sectionHeaderView.sortButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
@@ -123,25 +138,15 @@ final class MainViewController: ViewController {
                 actionSheet.addAction(
                     UIAlertAction(title: MainViewModel.SortType.title.rawValue,
                                   style: .default, handler: { result in
-                                    let toType: MainViewModel.SortType = .title
-                                    self.sectionHeaderView.sortDidChange(type: toType)
-                                    self.viewModel.input.changeSort.accept(toType)
+                                    sortTypeDidChanged(toType: .title)
                 }))
                 actionSheet.addAction(
                     UIAlertAction(title: MainViewModel.SortType.dateTime.rawValue,
-                                  style: .default,
-                                  handler: { result in
-                                    let toType: MainViewModel.SortType = .dateTime
-                                    self.sectionHeaderView.sortDidChange(type: toType)
-                                    self.viewModel.input.changeSort.accept(toType)
-
+                                  style: .default, handler: { result in
+                                    sortTypeDidChanged(toType: .dateTime)
                 }))
-                actionSheet.addAction(UIAlertAction(title: "취소",
-                                                    style: .cancel,
-                                                    handler: nil))
-                self.present(actionSheet,
-                             animated: true,
-                             completion: nil)
+                actionSheet.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+                self.present(actionSheet, animated: true, completion: nil)
             })
             .disposed(by: viewModel.bag)
         sectionHeaderView.filterButton.rx.tap
@@ -151,46 +156,23 @@ final class MainViewController: ViewController {
                 actionSheet.addAction(
                     UIAlertAction(title: MainViewModel.FilterType.all.rawValue,
                                   style: .default, handler: { result in
-                                    let toType: MainViewModel.FilterType = .all
-                                    self.sectionHeaderView.filterDidChange(type: toType)
-                                    self.viewModel.input.changeFilter.accept(toType)
+                                    filterTypeDidChanged(toType: .all)
                 }))
                 actionSheet.addAction(
                     UIAlertAction(title: MainViewModel.FilterType.blog.rawValue,
-                                  style: .default,
-                                  handler: { result in
-                                    let toType: MainViewModel.FilterType = .blog
-                                    self.sectionHeaderView.filterDidChange(type: toType)
-                                    self.viewModel.input.changeFilter.accept(toType)
-
+                                  style: .default, handler: { result in
+                                    filterTypeDidChanged(toType: .blog)
                 }))
                 actionSheet.addAction(
                     UIAlertAction(title: MainViewModel.FilterType.cafe.rawValue,
-                                  style: .default,
-                                  handler: { result in
-                                    let toType: MainViewModel.FilterType = .cafe
-                                    self.sectionHeaderView.filterDidChange(type: toType)
-                                    self.viewModel.input.changeFilter.accept(toType)
-
+                                  style: .default, handler: { result in
+                                    filterTypeDidChanged(toType: .cafe)
                 }))
-                actionSheet.addAction(UIAlertAction(title: "취소",
-                                                    style: .cancel,
-                                                    handler: nil))
-                self.present(actionSheet,
-                             animated: true,
-                             completion: nil)
+                actionSheet.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+                self.present(actionSheet, animated: true, completion: nil)
             })
             .disposed(by: viewModel.bag)
-    }
-    
-    private func addRecentHistory(query: String) {
-        guard query.count > 0 else { return }
-        // 같은 query string을 삭제해준다.
-        Defaults[\.recent].removeAll { item -> Bool in
-            return item == query
-        }
-        Defaults[\.recent].insert(query, at: 0)
-    }
+    }    
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -259,7 +241,7 @@ extension MainViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         guard let text = textField.text else { return true }
-        addRecentHistory(query: text)
+        viewModel.addRecentHistory(query: text)
         recentView.isHidden = true
         viewModel.input.nextRequest.accept(MainViewModel.Input.RequestInfo(isRefresh: true,
                                                                            filterType: viewModel.currentFilterType,
@@ -270,7 +252,7 @@ extension MainViewController: UITextFieldDelegate {
 
 extension MainViewController: RecentViewDelegate {
     func didSelect(title: String) {
-        addRecentHistory(query: title)
+        viewModel.addRecentHistory(query: title)
         if let view = customNavigationBar.customView as? SearchBarView {
             view.searchBar.text = title
             view.searchBar.resignFirstResponder()

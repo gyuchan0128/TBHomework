@@ -9,12 +9,6 @@
 import UIKit
 import Alamofire
 
-protocol TBAPI {
-    func url() -> URLConvertible
-    func method() -> HTTPMethod
-    func params() -> Parameters
-}
-
 enum SearchBlogAPI: TBAPI {
     case search(query: String, page: Int, size: Int)
     

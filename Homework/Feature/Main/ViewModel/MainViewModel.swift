@@ -9,6 +9,7 @@
 import RxSwift
 import RxCocoa
 import RxOptional
+import SwiftyUserDefaults
 
 final class MainViewModel: ReactiveViewModel {
     struct Const {
@@ -44,11 +45,6 @@ final class MainViewModel: ReactiveViewModel {
         case title      = "Title"
         case dateTime   = "Datetime"
     }
-    
-    let bag: DisposeBag = DisposeBag()
-    let blogRequester = BlogRequester(startPage: 1, sizeOfPage: Const.pagingSize)
-    let cafeRequester = CafeRequester(startPage: 1, sizeOfPage: Const.pagingSize)
-
     private(set) var currentFilterType: FilterType = .all
     private(set) var currentSortType: SortType = .title
     private(set) var beforeQuery: String = ""
@@ -56,7 +52,15 @@ final class MainViewModel: ReactiveViewModel {
     private(set) var input: Input = Input()
     private(set) var output: Output = Output()
     
-    private(set) var items: [SearchDocumentResponse] = []
+    private(set) var items: [SearchDocumentResponsable] = []
+    
+    let bag: DisposeBag = DisposeBag()
+    let blogRequester = PageableRequester<SearchBlogResponseModel>.init(startPage: 1, sizeOfPage: Const.pagingSize)
+    let cafeRequester = PageableRequester<SearchCafeResponseModel>.init(startPage: 1, sizeOfPage: Const.pagingSize)
+    
+    var recentList: [String] {
+        return Defaults[\.recent]
+    }
     
     init() {
         rxBind()
@@ -177,5 +181,14 @@ final class MainViewModel: ReactiveViewModel {
                 return first.datetime < second.datetime
             }
         }
+    }
+    
+    func addRecentHistory(query: String) {
+        guard query.count > 0 else { return }
+        // 같은 query string을 삭제해준다.
+        Defaults[\.recent].removeAll { item -> Bool in
+            return item == query
+        }
+        Defaults[\.recent].insert(query, at: 0)
     }
 }

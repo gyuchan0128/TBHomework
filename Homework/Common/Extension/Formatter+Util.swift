@@ -8,14 +8,12 @@
 
 import Foundation
 
-extension Formatter {
-    static let iso8601: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.locale = Locale.current
-        formatter.timeZone = TimeZone.current
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
-        return formatter
-    }()
+extension DateFormatter {
+    func iso8601() -> Self {
+        calendar = Calendar(identifier: .iso8601)
+        locale = Locale.current
+        timeZone = TimeZone.current
+        dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        return self
+    }
 }
-

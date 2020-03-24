@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-public extension Reactive where Base: UIViewController {
+extension Reactive where Base: UIViewController {
     var viewWillAppear: ControlEvent<Bool> {
         let source = self.methodInvoked(#selector(Base.viewWillAppear)).map { $0.first as? Bool ?? false }
         return ControlEvent(events: source)
@@ -39,5 +39,15 @@ public extension Reactive where Base: UIViewController {
     var viewDidDisappear: ControlEvent<Bool> {
         let source = self.methodInvoked(#selector(Base.viewDidDisappear)).map { $0.first as? Bool ?? false }
         return ControlEvent(events: source)
+    }
+}
+
+extension UIViewController {
+    var safeAreaTopHeight: CGFloat {
+        if #available(iOS 11.0, *) {
+            return UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
+        } else {
+            return UIApplication.shared.statusBarFrame.height
+        }
     }
 }
