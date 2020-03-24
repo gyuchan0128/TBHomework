@@ -46,7 +46,7 @@ struct CellPresentableModel {
     }
 }
 
-class TableViewCell: UITableViewCell {
+final class TableViewCell: UITableViewCell {
     struct Const {
         static let cellIdentifier: String = "TableViewCell"
         static let titleFont: UIFont = UIFont.systemFont(ofSize: 12, weight: .light)

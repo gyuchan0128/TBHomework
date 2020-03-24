@@ -10,8 +10,6 @@
 		412E27802425B97700B7DFB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E277F2425B97700B7DFB7 /* AppDelegate.swift */; };
 		412E27892425B97A00B7DFB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 412E27882425B97A00B7DFB7 /* Assets.xcassets */; };
 		412E278C2425B97A00B7DFB7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 412E278A2425B97A00B7DFB7 /* LaunchScreen.storyboard */; };
-		412E27972425B97B00B7DFB7 /* HomeworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E27962425B97B00B7DFB7 /* HomeworkTests.swift */; };
-		412E27A22425B97B00B7DFB7 /* HomeworkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E27A12425B97B00B7DFB7 /* HomeworkUITests.swift */; };
 		412E27B12425B9C600B7DFB7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E27B02425B9C600B7DFB7 /* MainViewController.swift */; };
 		412E27B52425BACD00B7DFB7 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E27B42425BACD00B7DFB7 /* NavigationController.swift */; };
 		412E27B82425C14800B7DFB7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E27B72425C14800B7DFB7 /* ViewController.swift */; };
@@ -43,20 +41,17 @@
 		412E292E2429C52B00B7DFB7 /* SearchResponsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E292D2429C52B00B7DFB7 /* SearchResponsable.swift */; };
 		412E29302429C5EB00B7DFB7 /* TBAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E292F2429C5EB00B7DFB7 /* TBAPI.swift */; };
 		412E29322429C6B800B7DFB7 /* PageableRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E29312429C6B800B7DFB7 /* PageableRequester.swift */; };
+		412E2936242A082F00B7DFB7 /* ResponseModelMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E2935242A082F00B7DFB7 /* ResponseModelMappingTests.swift */; };
+		412E2939242A089300B7DFB7 /* LoadJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E2938242A089300B7DFB7 /* LoadJSON.swift */; };
+		412E293D242A098F00B7DFB7 /* BlogResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 412E293B242A098F00B7DFB7 /* BlogResponse.json */; };
+		412E293E242A098F00B7DFB7 /* CafeResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 412E293C242A098F00B7DFB7 /* CafeResponse.json */; };
+		412E2943242A0DC100B7DFB7 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E2942242A0DC100B7DFB7 /* MainViewModelTests.swift */; };
 		A2A5F162EF519741DC878416 /* Pods_Homework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D2E5BDBA68224E82636780 /* Pods_Homework.framework */; };
-		E9C1CCCAC56A5C843DBD4B39 /* Pods_Homework_HomeworkUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C82921228018898657AF6DE5 /* Pods_Homework_HomeworkUITests.framework */; };
 		FDF7E3A38F7A376EF710B5A8 /* Pods_HomeworkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0953D4766A6AFD3CAF497D /* Pods_HomeworkTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		412E27932425B97B00B7DFB7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 412E27742425B97700B7DFB7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 412E277B2425B97700B7DFB7;
-			remoteInfo = Homework;
-		};
-		412E279E2425B97B00B7DFB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 412E27742425B97700B7DFB7 /* Project object */;
 			proxyType = 1;
@@ -73,11 +68,7 @@
 		412E278B2425B97A00B7DFB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		412E278D2425B97A00B7DFB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		412E27922425B97B00B7DFB7 /* HomeworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomeworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		412E27962425B97B00B7DFB7 /* HomeworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkTests.swift; sourceTree = "<group>"; };
 		412E27982425B97B00B7DFB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		412E279D2425B97B00B7DFB7 /* HomeworkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomeworkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		412E27A12425B97B00B7DFB7 /* HomeworkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkUITests.swift; sourceTree = "<group>"; };
-		412E27A32425B97B00B7DFB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		412E27B02425B9C600B7DFB7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		412E27B42425BACD00B7DFB7 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		412E27B72425C14800B7DFB7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +100,11 @@
 		412E292D2429C52B00B7DFB7 /* SearchResponsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponsable.swift; sourceTree = "<group>"; };
 		412E292F2429C5EB00B7DFB7 /* TBAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBAPI.swift; sourceTree = "<group>"; };
 		412E29312429C6B800B7DFB7 /* PageableRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageableRequester.swift; sourceTree = "<group>"; };
+		412E2935242A082F00B7DFB7 /* ResponseModelMappingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModelMappingTests.swift; sourceTree = "<group>"; };
+		412E2938242A089300B7DFB7 /* LoadJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadJSON.swift; sourceTree = "<group>"; };
+		412E293B242A098F00B7DFB7 /* BlogResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BlogResponse.json; sourceTree = "<group>"; };
+		412E293C242A098F00B7DFB7 /* CafeResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CafeResponse.json; sourceTree = "<group>"; };
+		412E2942242A0DC100B7DFB7 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		5A0953D4766A6AFD3CAF497D /* Pods_HomeworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F5FE81AF712E02DC3AB5EAF /* Pods-Homework.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homework.release.xcconfig"; path = "Target Support Files/Pods-Homework/Pods-Homework.release.xcconfig"; sourceTree = "<group>"; };
 		AA81D48B7B09B3F00505904C /* Pods-Homework-HomeworkUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homework-HomeworkUITests.debug.xcconfig"; path = "Target Support Files/Pods-Homework-HomeworkUITests/Pods-Homework-HomeworkUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -136,14 +132,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		412E279A2425B97B00B7DFB7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E9C1CCCAC56A5C843DBD4B39 /* Pods_Homework_HomeworkUITests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -152,7 +140,6 @@
 			children = (
 				412E277E2425B97700B7DFB7 /* Homework */,
 				412E27952425B97B00B7DFB7 /* HomeworkTests */,
-				412E27A02425B97B00B7DFB7 /* HomeworkUITests */,
 				412E277D2425B97700B7DFB7 /* Products */,
 				5B3B3C0C39EE9576273F85E5 /* Pods */,
 				81421FE6EAB93AB9D4968204 /* Frameworks */,
@@ -164,7 +151,6 @@
 			children = (
 				412E277C2425B97700B7DFB7 /* Homework.app */,
 				412E27922425B97B00B7DFB7 /* HomeworkTests.xctest */,
-				412E279D2425B97B00B7DFB7 /* HomeworkUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,19 +172,13 @@
 		412E27952425B97B00B7DFB7 /* HomeworkTests */ = {
 			isa = PBXGroup;
 			children = (
-				412E27962425B97B00B7DFB7 /* HomeworkTests.swift */,
+				412E293A242A096B00B7DFB7 /* ResponseData */,
+				412E2937242A087D00B7DFB7 /* Util */,
 				412E27982425B97B00B7DFB7 /* Info.plist */,
+				412E2935242A082F00B7DFB7 /* ResponseModelMappingTests.swift */,
+				412E2942242A0DC100B7DFB7 /* MainViewModelTests.swift */,
 			);
 			path = HomeworkTests;
-			sourceTree = "<group>";
-		};
-		412E27A02425B97B00B7DFB7 /* HomeworkUITests */ = {
-			isa = PBXGroup;
-			children = (
-				412E27A12425B97B00B7DFB7 /* HomeworkUITests.swift */,
-				412E27A32425B97B00B7DFB7 /* Info.plist */,
-			);
-			path = HomeworkUITests;
 			sourceTree = "<group>";
 		};
 		412E27AF2425B9B300B7DFB7 /* Main */ = {
@@ -381,6 +361,23 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		412E2937242A087D00B7DFB7 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				412E2938242A089300B7DFB7 /* LoadJSON.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		412E293A242A096B00B7DFB7 /* ResponseData */ = {
+			isa = PBXGroup;
+			children = (
+				412E293B242A098F00B7DFB7 /* BlogResponse.json */,
+				412E293C242A098F00B7DFB7 /* CafeResponse.json */,
+			);
+			path = ResponseData;
+			sourceTree = "<group>";
+		};
 		5B3B3C0C39EE9576273F85E5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,26 +443,6 @@
 			productReference = 412E27922425B97B00B7DFB7 /* HomeworkTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		412E279C2425B97B00B7DFB7 /* HomeworkUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 412E27AC2425B97B00B7DFB7 /* Build configuration list for PBXNativeTarget "HomeworkUITests" */;
-			buildPhases = (
-				109633F1EFFF6C76412C37F4 /* [CP] Check Pods Manifest.lock */,
-				412E27992425B97B00B7DFB7 /* Sources */,
-				412E279A2425B97B00B7DFB7 /* Frameworks */,
-				412E279B2425B97B00B7DFB7 /* Resources */,
-				6EFE262A4658438F3D52FF13 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				412E279F2425B97B00B7DFB7 /* PBXTargetDependency */,
-			);
-			name = HomeworkUITests;
-			productName = HomeworkUITests;
-			productReference = 412E279D2425B97B00B7DFB7 /* HomeworkUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -481,10 +458,7 @@
 					};
 					412E27912425B97B00B7DFB7 = {
 						CreatedOnToolsVersion = 11.3.1;
-						TestTargetID = 412E277B2425B97700B7DFB7;
-					};
-					412E279C2425B97B00B7DFB7 = {
-						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
 						TestTargetID = 412E277B2425B97700B7DFB7;
 					};
 				};
@@ -504,7 +478,6 @@
 			targets = (
 				412E277B2425B97700B7DFB7 /* Homework */,
 				412E27912425B97B00B7DFB7 /* HomeworkTests */,
-				412E279C2425B97B00B7DFB7 /* HomeworkUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -524,41 +497,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		412E279B2425B97B00B7DFB7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				412E293D242A098F00B7DFB7 /* BlogResponse.json in Resources */,
+				412E293E242A098F00B7DFB7 /* CafeResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		109633F1EFFF6C76412C37F4 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Homework-HomeworkUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1FAB24C39FC78B523D4B7B55 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -618,23 +564,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6EFE262A4658438F3D52FF13 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Homework-HomeworkUITests/Pods-Homework-HomeworkUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Homework-HomeworkUITests/Pods-Homework-HomeworkUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Homework-HomeworkUITests/Pods-Homework-HomeworkUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8C4C9CFA51574B10A84D7241 /* [CP] Embed Pods Frameworks */ = {
@@ -699,15 +628,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				412E27972425B97B00B7DFB7 /* HomeworkTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		412E27992425B97B00B7DFB7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				412E27A22425B97B00B7DFB7 /* HomeworkUITests.swift in Sources */,
+				412E2943242A0DC100B7DFB7 /* MainViewModelTests.swift in Sources */,
+				412E2936242A082F00B7DFB7 /* ResponseModelMappingTests.swift in Sources */,
+				412E2939242A089300B7DFB7 /* LoadJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,11 +641,6 @@
 			isa = PBXTargetDependency;
 			target = 412E277B2425B97700B7DFB7 /* Homework */;
 			targetProxy = 412E27932425B97B00B7DFB7 /* PBXContainerItemProxy */;
-		};
-		412E279F2425B97B00B7DFB7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 412E277B2425B97700B7DFB7 /* Homework */;
-			targetProxy = 412E279E2425B97B00B7DFB7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -788,7 +706,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -842,7 +760,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -900,6 +818,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5TGNZ3S2RV;
 				INFOPLIST_FILE = HomeworkTests/Info.plist;
@@ -911,6 +830,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gyuchan.HomeworkTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Homework.app/Homework";
@@ -923,6 +843,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5TGNZ3S2RV;
 				INFOPLIST_FILE = HomeworkTests/Info.plist;
@@ -937,48 +858,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Homework.app/Homework";
-			};
-			name = Release;
-		};
-		412E27AD2425B97B00B7DFB7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA81D48B7B09B3F00505904C /* Pods-Homework-HomeworkUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5TGNZ3S2RV;
-				INFOPLIST_FILE = HomeworkUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gyuchan.HomeworkUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Homework;
-			};
-			name = Debug;
-		};
-		412E27AE2425B97B00B7DFB7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D788D7D9912C5A3B8C395D7 /* Pods-Homework-HomeworkUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5TGNZ3S2RV;
-				INFOPLIST_FILE = HomeworkUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gyuchan.HomeworkUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Homework;
 			};
 			name = Release;
 		};
@@ -1008,15 +887,6 @@
 			buildConfigurations = (
 				412E27AA2425B97B00B7DFB7 /* Debug */,
 				412E27AB2425B97B00B7DFB7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		412E27AC2425B97B00B7DFB7 /* Build configuration list for PBXNativeTarget "HomeworkUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				412E27AD2425B97B00B7DFB7 /* Debug */,
-				412E27AE2425B97B00B7DFB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -90,7 +90,7 @@ final class MainViewModel: ReactiveViewModel {
             .do(onNext: { [weak self] type in
                 guard let self = self else { return }
                 self.currentSortType = type
-                self.sortItems()
+                self.items.sortDocumentItems(sortType: type)
             })
             .map { _ in Void() }
             .bind(to: output.updateList)
@@ -137,7 +137,7 @@ final class MainViewModel: ReactiveViewModel {
                 self.items.append(contentsOf: items)
                 //현재 정렬방법에 맞춰 다시 정렬을 진행한다.
                 if items.count > 0 {
-                    self.sortItems()
+                    self.items.sortDocumentItems(sortType: self.currentSortType)
                 }
             })
             .map { _ in Void() }
@@ -159,28 +159,12 @@ final class MainViewModel: ReactiveViewModel {
                 self.items.append(contentsOf: items)
                 //현재 정렬방법에 맞춰 다시 정렬을 진행한다.
                 if items.count > 0 {
-                    self.sortItems()
+                    self.items.sortDocumentItems(sortType: self.currentSortType)
                 }
             })
             .map { _ in Void() }
             .bind(to: output.updateList)
             .disposed(by: bag)
-    }
-    
-    private func sortItems() {
-        //현재 정렬방법에 맞춰 다시 정렬을 진행한다.
-        switch self.currentSortType {
-        case .title:
-            self.items.sort { (first, second) -> Bool in
-                let firstString = first.title.removeHTMLTags()
-                let secondString = second.title.removeHTMLTags()
-                return firstString < secondString
-            }
-        case .dateTime:
-            self.items.sort { (first, second) -> Bool in
-                return first.datetime < second.datetime
-            }
-        }
     }
     
     func addRecentHistory(query: String) {
