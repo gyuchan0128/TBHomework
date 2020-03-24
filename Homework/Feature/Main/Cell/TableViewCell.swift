@@ -100,11 +100,11 @@ class TableViewCell: UITableViewCell {
         self.nameLabel.text = pModel.name
         self.titleLabel.text = pModel.title
         self.dateLabel.text = pModel.date
+        self.thumbnailImageView.image = nil
         if let imageURL = pModel.imageURL {
             self.thumbnailImageView.af_setImage(withURL: imageURL)
             self.thumbnailImageView.isHidden = false
         } else {
-            self.thumbnailImageView.image = nil
             self.thumbnailImageView.isHidden = true
         }
         
@@ -114,5 +114,5 @@ class TableViewCell: UITableViewCell {
             dimmedView.isHidden = true
         }
     }
-    
+
 }
